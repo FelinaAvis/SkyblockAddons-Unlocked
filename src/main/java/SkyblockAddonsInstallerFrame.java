@@ -50,8 +50,8 @@ public class SkyblockAddonsInstallerFrame extends JFrame implements ActionListen
 
     public SkyblockAddonsInstallerFrame() {
         try {
-            setName("SkyblockAddonsInstallerFrame");
-            setTitle("SkyblockAddons Installer");
+            setName("SkyblockAddonsUnlockedInstallerFrame");
+            setTitle("SkyblockAddons-Unlocked Installer");
             setResizable(false);
             setSize(TOTAL_WIDTH, TOTAL_HEIGHT);
             setContentPane(getPanelContentPane());
@@ -155,7 +155,7 @@ public class SkyblockAddonsInstallerFrame extends JFrame implements ActionListen
                 versionInfo.setFont(new Font(Font.DIALOG, Font.BOLD, 14));
                 versionInfo.setHorizontalAlignment(SwingConstants.CENTER);
                 versionInfo.setPreferredSize(new Dimension(w, h));
-                versionInfo.setText("v"+getVersionFromMcmodInfo()+" by Biscuit - for Minecraft 1.8.9");
+                versionInfo.setText("v"+getVersionFromMcmodInfo()+" by Biscuit, unlocked by Xyl - for Minecraft 1.8.9");
 
                 y += h;
             } catch (Throwable ivjExc) {
@@ -174,7 +174,7 @@ public class SkyblockAddonsInstallerFrame extends JFrame implements ActionListen
                 descriptionText = new JTextArea();
                 descriptionText.setName("TextArea");
                 setTextAreaProperties(descriptionText);
-                descriptionText.setText("This installer will copy SkyblockAddons into your forge mods folder for you, and replace any old versions that already exist. " +
+                descriptionText.setText("This installer will copy SkyblockAddons-Unlocked into your forge mods folder for you, and replace any old versions that already exist. " +
                         "Close this if you prefer to do this yourself!");
                 descriptionText.setWrapStyleWord(true);
 
@@ -416,7 +416,7 @@ public class SkyblockAddonsInstallerFrame extends JFrame implements ActionListen
                 inSubFolder = true;
             }
 
-            File newFile = new File(modsFolder, "SkyblockAddons-1.8.9-"+getVersionFromMcmodInfo()+".jar");
+            File newFile = new File(modsFolder, "SkyblockAddons-Unlocked-1.8.9-"+getVersionFromMcmodInfo()+".jar");
             if (thisFile.equals(newFile)) {
                 showErrorMessage("You are opening this file from where the file should be installed... there's nothing to be done!");
                 return;
@@ -454,7 +454,7 @@ public class SkyblockAddonsInstallerFrame extends JFrame implements ActionListen
                 return;
             }
 
-            showMessage("SkyblockAddons has been successfully installed into your mods folder.");
+            showMessage("SkyblockAddons-Unlocked has been successfully installed into your mods folder.");
             dispose();
             System.exit(0);
         }
@@ -471,7 +471,7 @@ public class SkyblockAddonsInstallerFrame extends JFrame implements ActionListen
                     if (mcModInfo != null) {
                         InputStream inputStream = jarFile.getInputStream(mcModInfo);
                         String modID = getModIDFromInputStream(inputStream);
-                        if (modID.equals("skyblockaddons")) {
+                        if (modID.equals("skyblockaddons") || modID.equals("skyblockaddons-unlocked")) {
                             jarFile.close();
                             try {
                                 boolean deleted = file.delete();
@@ -581,11 +581,11 @@ public class SkyblockAddonsInstallerFrame extends JFrame implements ActionListen
     }
 
     public void showMessage(String message) {
-        JOptionPane.showMessageDialog(null, message, "SkyblockAddons", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, message, "SkyblockAddons-Unlocked", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void showErrorMessage(String message) {
-        JOptionPane.showMessageDialog(null, message, "SkyblockAddons - Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, message, "SkyblockAddons-Unlocked - Error", JOptionPane.ERROR_MESSAGE);
     }
 
     public enum OperatingSystem {

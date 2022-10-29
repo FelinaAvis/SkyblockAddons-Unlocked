@@ -133,7 +133,7 @@ public class SkyblockAddonsTransformer implements IClassTransformer {
      * @param message the message to log
      */
     public void log(Level level, String message) {
-        String name = "SkyblockAddons/" + this.getClass().getSimpleName();
+        String name = "SkyblockAddons-Unlocked/" + this.getClass().getSimpleName();
         FMLRelaunchLog.log(name, level, (SkyblockAddonsTransformer.isDeobfuscated() ? "" : "[" + name + "] ") + message);
     }
 }

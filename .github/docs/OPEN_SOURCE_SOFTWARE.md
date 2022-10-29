@@ -1,6 +1,6 @@
 # Open Source Software
 
-SkyblockAddons uses the following open source software:
+SkyblockAddons-Unlocked uses the following open source software:
 
 Software | License | Bundled
 ------------ | ------------- | -------------
@@ -15,5 +15,6 @@ Software | License | Bundled
 [Minecraft Forge](https://github.com/MinecraftForge/MinecraftForge/tree/1.8.9) | [Minecraft Forge License](https://github.com/MinecraftForge/MinecraftForge/blob/1.8.9/MinecraftForge-License.txt) | Modified Log4j configuration included with source distribution
 [Project Lombok](https://projectlombok.org/) | [MIT License](https://opensource.org/licenses/mit-license.php)
 [SLF4J API Module](http://www.slf4j.org/) | [MIT License](../../dependencyLicenses/slf4j-api/MIT.txt) | :white_check_mark:
+[SkyblockAddons](https://github.com/BiscuitDevelopment/SkyblockAddons) | [MIT License](https://raw.githubusercontent.com/BiscuitDevelopment/SkyblockAddons/main/LICENSE) | IDK I guess sorta
 
 [Attribution Notices](NOTICES.md)

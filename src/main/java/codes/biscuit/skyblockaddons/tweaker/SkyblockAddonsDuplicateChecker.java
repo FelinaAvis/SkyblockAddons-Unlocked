@@ -64,7 +64,7 @@ public class SkyblockAddonsDuplicateChecker implements IFMLCallHook {
      * @param message the message
      */
     private void log(Level level, Throwable throwable, String message) {
-        String loggerName = "SkyblockAddons/" + this.getClass().getSimpleName();
+        String loggerName = "SkyblockAddons-Unlocked/" + this.getClass().getSimpleName();
 
         if (throwable != null) {
             FMLRelaunchLog.log(loggerName, level, throwable, (SkyblockAddonsTransformer.isDeobfuscated() ? "" : "[" + loggerName + "] ") + message);

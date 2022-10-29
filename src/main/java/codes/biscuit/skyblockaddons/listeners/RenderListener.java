@@ -558,6 +558,10 @@ public class RenderListener {
                 main.getUpdater().sendUpdateMessage();
             }
         }
+
+        if (updater.hasBaseUpdate()) {
+            updater.sendBaseUpdateMessage();
+        }
     }
 
     /**

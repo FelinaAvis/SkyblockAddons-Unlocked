@@ -36,8 +36,10 @@ public class Updater {
     private String showcaseLink;
 
     private boolean hasUpdate = false;
+    private boolean hasBaseUpdate = false;
     private boolean isPatch = false;
     private boolean sentUpdateMessage = false;
+    private boolean sentBaseUpdateMessage = false;
 
     /**
      * Returns whether the update notification message has already been sent.
@@ -58,11 +60,21 @@ public class Updater {
     }
 
     /**
+     * Returns whether there is an update to the SkyblockAddons base available
+     *
+     * @return {@code true} if there is a base update available, {@code false} otherwise.
+     */
+    public boolean hasBaseUpdate() {
+        return hasBaseUpdate;
+    }
+
+    /**
      * Checks the online data for an update and sets the correct message to be displayed.
      */
     public void checkForUpdate() {
         logger.info("Checking to see if an update is available...");
-        UpdateInfo updateInfo = main.getOnlineData().getUpdateInfo();
+        UpdateInfo updateInfo = main.getUpdateInfo();
+        UpdateInfo baseInfo = main.getOnlineData().getUpdateInfo();
 
         // Variables reset for testing update checker notifications
         sentUpdateMessage = false;
@@ -75,16 +87,23 @@ public class Updater {
 
         ComparableVersion latestRelease = null;
         ComparableVersion latestBeta = null;
+        ComparableVersion latestBase = null;
         ComparableVersion current = new ComparableVersion(SkyblockAddons.VERSION);
         boolean isCurrentBeta = isBetaVersion(current);
         boolean latestReleaseExists = updateInfo.getLatestRelease() != null && !updateInfo.getLatestRelease().equals("");
         boolean latestBetaExists = updateInfo.getLatestBeta() != null && !updateInfo.getLatestBeta().equals("");
+        boolean latestBaseExists = baseInfo.getLatestRelease() != null && !baseInfo.getLatestRelease().equals("");
         int releaseDiff = 0;
         int betaDiff = 0;
+        int baseDiff = 0;
 
         if (latestReleaseExists) {
             latestRelease = new ComparableVersion(updateInfo.getLatestRelease());
             releaseDiff = latestRelease.compareTo(current);
+            if (latestBaseExists) {
+                latestBase = new ComparableVersion(baseInfo.getLatestRelease());
+                baseDiff = latestBase.compareTo(latestRelease);
+            }
         } else {
             if (!isCurrentBeta) {
                 logger.error("Update check failed: Current version is a release version and key `latestRelease` is null " +
@@ -206,6 +225,10 @@ public class Updater {
         } else {
             logger.info("Up to date!");
         }
+
+        if (baseDiff > 0) {
+            hasBaseUpdate = true;
+        }
     }
 
     public void sendUpdateMessage() {
@@ -215,7 +238,7 @@ public class Updater {
 
         String targetVersion = target.toString();
 
-        main.getUtils().sendMessage("§7§m----------------§7[ §b§lSkyblockAddons §7]§7§m----------------", false);
+        main.getUtils().sendMessage("§7§m-----------------§7[ §b§lSBA-Unlocked §7]§7§m-----------------", false);
 
         ChatComponentText newUpdate = new ChatComponentText("§b" + Translations.getMessage(
                 "messages.updateChecker.newUpdateAvailable", targetVersion) + "\n");
@@ -287,6 +310,16 @@ public class Updater {
         main.getUtils().sendMessage("§7§m--------------------------------------------------", false);
 
         sentUpdateMessage = true;
+    }
+
+    public void sendBaseUpdateMessage() {
+        if(sentBaseUpdateMessage) {
+            return;
+        }
+
+        main.getUtils().sendMessage("SBA-Unlocked needs to update to the latest SBA base! Make a GitHub issue to annoy the maintainer.", true);
+
+        sentBaseUpdateMessage = true;
     }
 
     /**

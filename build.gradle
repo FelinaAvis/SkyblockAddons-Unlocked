@@ -131,11 +131,11 @@ jar {
     manifest.attributes(
             'Manifest-Version': '2.0',
             'Main-Class': 'SkyblockAddonsInstallerFrame',
-            'Implementation-Title': project.name,
+            'Implementation-Title': "${project.name}-Unlocked",
             'Implementation-Version': project.version,
-            'Implementation-Vendor' : 'BiscuitDevelopment',
-            'Specification-Title': project.name,
-            'Specification-Vendor': 'BiscuitDevelopment',
+            'Implementation-Vendor' : 'Xyl',
+            'Specification-Title': "${project.name}-Unlocked",
+            'Specification-Vendor': 'Xyl',
             'Specification-Version': project.version,
             'FMLCorePlugin': "${project.group}.${modId}.tweaker.${project.name}LoadingPlugin",
             'ForceLoadAsMod': true,
@@ -149,7 +149,7 @@ remapJar {
     from(tasks.shadowJar)
     input.set(tasks.shadowJar.archiveFile.get())
 
-    archiveFileName = "${project.name}-${project.version}-for-MC-${project.minecraftVersion}.jar"
+    archiveFileName = "${project.name}-Unlocked-${project.version}-for-MC-${project.minecraftVersion}.jar"
 }
 
 processResources {

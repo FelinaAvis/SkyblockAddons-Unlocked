@@ -4,6 +4,7 @@ import codes.biscuit.skyblockaddons.SkyblockAddons;
 import codes.biscuit.skyblockaddons.core.Language;
 import codes.biscuit.skyblockaddons.core.OnlineData;
 import codes.biscuit.skyblockaddons.core.Translations;
+import codes.biscuit.skyblockaddons.core.UpdateInfo;
 import codes.biscuit.skyblockaddons.core.seacreatures.SeaCreature;
 import codes.biscuit.skyblockaddons.core.seacreatures.SeaCreatureManager;
 import codes.biscuit.skyblockaddons.exceptions.DataLoadingException;
@@ -39,9 +40,7 @@ import org.apache.http.impl.client.HttpRequestFutureTask;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
@@ -151,6 +150,16 @@ public class DataUtils {
                 InputStreamReader inputStreamReader = new InputStreamReader(Objects.requireNonNull(inputStream),
                         StandardCharsets.UTF_8)){
             main.setOnlineData(gson.fromJson(inputStreamReader, OnlineData.class));
+        } catch (Exception ex) {
+            handleLocalFileReadException(path, ex);
+        }
+
+        // Update Data
+        path = "/update.json";
+        try (   InputStream inputStream = DataUtils.class.getResourceAsStream(path);
+                InputStreamReader inputStreamReader = new InputStreamReader(Objects.requireNonNull(inputStream),
+                        StandardCharsets.UTF_8)){
+            main.setUpdateInfo(gson.fromJson(inputStreamReader, UpdateInfo.class));
         } catch (Exception ex) {
             handleLocalFileReadException(path, ex);
         }
@@ -406,6 +415,7 @@ public class DataUtils {
 
     private static void registerRemoteRequests() {
         remoteRequests.add(new OnlineDataRequest());
+        remoteRequests.add(new UpdateRequest());
         if (SkyblockAddons.getInstance().getConfigValues().getLanguage() != Language.ENGLISH) {
             remoteRequests.add(new LocalizedStringsRequest(SkyblockAddons.getInstance().getConfigValues().getLanguage()));
         }

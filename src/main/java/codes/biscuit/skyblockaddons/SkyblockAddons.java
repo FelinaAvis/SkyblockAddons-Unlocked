@@ -7,6 +7,7 @@ import codes.biscuit.skyblockaddons.config.PersistentValuesManager;
 import codes.biscuit.skyblockaddons.core.Feature;
 import codes.biscuit.skyblockaddons.core.OnlineData;
 import codes.biscuit.skyblockaddons.core.Translations;
+import codes.biscuit.skyblockaddons.core.UpdateInfo;
 import codes.biscuit.skyblockaddons.core.dungeons.DungeonManager;
 import codes.biscuit.skyblockaddons.features.EntityOutlines.EntityOutlineRenderer;
 import codes.biscuit.skyblockaddons.features.EntityOutlines.FeatureDungeonTeammateOutlines;
@@ -58,11 +59,11 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 @Getter
-@Mod(modid = "skyblockaddons", name = "SkyblockAddons", version = "@VERSION@", clientSideOnly = true, acceptedMinecraftVersions = "@MOD_ACCEPTED@")
+@Mod(modid = "skyblockaddons", name = "SkyblockAddons-Unlocked", version = "@VERSION@", clientSideOnly = true, acceptedMinecraftVersions = "@MOD_ACCEPTED@")
 public class SkyblockAddons {
 
     public static final String MOD_ID = "skyblockaddons";
-    public static final String MOD_NAME = "SkyblockAddons";
+    public static final String MOD_NAME = "SkyblockAddons-Unlocked";
     public static String VERSION = "@VERSION@";
     /**
      * This is set by the CI. If the build isn't done on CI, this will be an empty string.
@@ -99,6 +100,8 @@ public class SkyblockAddons {
     private final Updater updater;
     @Setter
     private OnlineData onlineData;
+    @Setter
+    private UpdateInfo updateInfo;
     private final DiscordRPCManager discordRPCManager;
     private final Scheduler scheduler;
     private final NewScheduler newScheduler;

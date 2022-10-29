@@ -1,6 +1,7 @@
 package codes.biscuit.skyblockaddons.core;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -13,6 +14,7 @@ public class OnlineData {
     private String bannerImageURL;
     private String bannerLink;
 
+    @Setter
     private UpdateInfo updateInfo;
 
     private String languageJSONFormat;
